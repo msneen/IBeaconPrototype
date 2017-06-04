@@ -9,30 +9,37 @@ namespace IBeaconPrototype
 {
 	public partial class MainPage : ContentPage
 	{
-	    private BeaconIPhone _beaconIPhone;
+#if __IOS__
+        private BeaconIPhone _beaconIPhone;
 	    private BeaconLocatorIPhone _beaconLocatorIPhone;
+#endif
 
-	    public MainPage()
+        public MainPage()
 		{
 			InitializeComponent();
 		}
 
 	    private void IBeaconButtonOn_OnClicked(object sender, EventArgs e)
 	    {
-	        _beaconIPhone = new BeaconIPhone("6199224340");
+#if __IOS__
+            _beaconIPhone = new BeaconIPhone("6199224340");
             _beaconIPhone.StartAdvertising();
             BackgroundColor = Color.Green;
-	    }
+#endif
+        }
 
-	    private void IBeaconButtonOff_OnClicked(object sender, EventArgs e)
+        private void IBeaconButtonOff_OnClicked(object sender, EventArgs e)
 	    {
-	        _beaconIPhone?.StopAdvertising();
+#if __IOS__
+            _beaconIPhone?.StopAdvertising();
             BackgroundColor= Color.White;
-	    }
+#endif
+        }
 
-	    private void ListenButtonOn_OnClicked(object sender, EventArgs e)
+        private void ListenButtonOn_OnClicked(object sender, EventArgs e)
 	    {
-	        _beaconLocatorIPhone = new BeaconLocatorIPhone(new List<string> { { "6199224340"}});
+#if __IOS__
+            _beaconLocatorIPhone = new BeaconLocatorIPhone(new List<string> { { "6199224340"}});
 	        _beaconLocatorIPhone.BeaconRangedEvent += (o, args) =>
 	        {
 	            SetBackgroundColor(args);
@@ -43,11 +50,14 @@ namespace IBeaconPrototype
 	        };
 
             BackgroundColor = Color.Blue;
-	    }
+#endif
+        }
 
-	    private void SetBackgroundColor(BeaconEventArgs args)
+#if __IOS__
+        private void SetBackgroundColor(BeaconEventArgs args)
 	    {
-	        switch (args.CurrentProximity)
+
+            switch (args.CurrentProximity)
 	        {
 	            case CrossProximity.Far:
 	                BackgroundColor = Color.Red;
@@ -62,13 +72,16 @@ namespace IBeaconPrototype
 	                BackgroundColor = Color.Teal;
 	                break;
 	        }
-	    }
 
-	    private void ListenButtonOff_OnClicked(object sender, EventArgs e)
+        }
+#endif
+        private void ListenButtonOff_OnClicked(object sender, EventArgs e)
 	    {
+#if __IOS__
             _beaconLocatorIPhone.Stop();
 	        _beaconLocatorIPhone = null;
             BackgroundColor=Color.White;
-	    }
-	}
+#endif
+        }
+    }
 }

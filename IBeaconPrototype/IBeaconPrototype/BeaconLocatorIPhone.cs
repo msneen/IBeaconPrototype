@@ -6,8 +6,11 @@ using Foundation;
 
 namespace IBeaconPrototype
 {
+#if __IOS__
     public delegate void BeaconRangedEventHandler(object sender, BeaconEventArgs e);
     public delegate void RegionEnteredEventHandler(object sender, BeaconEventArgs e);
+
+
 
     public enum CrossProximity
     {
@@ -142,4 +145,6 @@ namespace IBeaconPrototype
 
 
     }
+
+#endif
 }

@@ -17,6 +17,8 @@ namespace IBeaconPrototype
         void StopAdvertising();
     }
 
+#if __IOS__
+
     public class BeaconIPhone : IBeacon
     {
         private string _phoneNumber;
@@ -71,4 +73,6 @@ namespace IBeaconPrototype
             }
         }
     }
+
+#endif
 }
