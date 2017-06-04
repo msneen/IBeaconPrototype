@@ -35,7 +35,7 @@ namespace IBeaconPrototype
         public BeaconIPhone(string phoneNumber)
         {
             _phoneNumber = phoneNumber;
-            BeaconInfo.BeaconUuid += phoneNumber;
+            //BeaconInfo.BeaconUuid += phoneNumber;
             //_iBeaconId = phoneNumber;
 
             Initialize();
@@ -43,7 +43,8 @@ namespace IBeaconPrototype
 
         private void Initialize()
         {
-            var beaconUUID = new NSUuid(BeaconInfo.BeaconUuid);
+            var beaconId = BeaconInfo.BeaconUuid + _phoneNumber;
+            var beaconUUID = new NSUuid(beaconId);
             var beaconRegion = new CLBeaconRegion(beaconUUID, _phoneNumber);
 
             //power - the received signal strength indicator (RSSI) value (measured in decibels) of the beacon from one meter away
