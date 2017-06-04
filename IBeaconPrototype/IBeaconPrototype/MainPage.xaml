@@ -7,5 +7,9 @@
 	<Label Text="Welcome to Xamarin Forms!" 
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
+    <Button Text="iBeacon On" x:Name="IBeaconButtonOn" Clicked="IBeaconButtonOn_OnClicked"></Button>
+    <Button Text="iBeacon Off" x:Name="IBeaconButtonOff" Clicked="IBeaconButtonOff_OnClicked"></Button>
+    <Button Text="Listen" x:Name="ListenButtonOn" Clicked="ListenButtonOn_OnClicked"></Button>
+    <Button Text="Stop Listening" x:Name="ListenButtonOff" Clicked="ListenButtonOff_OnClicked"></Button>
 
 </ContentPage>

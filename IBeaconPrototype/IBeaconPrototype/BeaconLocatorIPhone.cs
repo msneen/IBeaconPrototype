@@ -49,20 +49,16 @@ namespace IBeaconPrototype
         private readonly List<BeaconInfo> _beaconInfoList = new List<BeaconInfo>();
 
         private string monkeyId = "6199224340";
+        private List<string> _phoneNumerList;
 
         public BeaconLocatorIPhone(List<string> phoneNumbers)
         {
             Initialize();
+            _phoneNumerList = phoneNumbers;
 
             foreach (var phoneNumber in phoneNumbers)
             {
-                var beaconIdNsUuid = new NSUuid(BeaconInfo.BeaconUuid + phoneNumber);
-                var beaconInfo = new BeaconInfo
-                {
-                    PhoneNumber = phoneNumber,
-                    BeaconIdNsUuid = beaconIdNsUuid,   //monkeyUUid
-                    BeaconRegion = new CLBeaconRegion(beaconIdNsUuid, phoneNumber)
-                };
+                var beaconInfo = GetBeaconInfo(phoneNumber);
                 beaconInfo.BeaconRegion.NotifyEntryStateOnDisplay = true;
                 beaconInfo.BeaconRegion.NotifyOnEntry = true;
                 beaconInfo.BeaconRegion.NotifyOnExit = true;
@@ -72,7 +68,30 @@ namespace IBeaconPrototype
 
                 _beaconInfoList.Add(beaconInfo);
             }
+            
+        }
 
+        private static BeaconInfo GetBeaconInfo(string phoneNumber)
+        {
+            var beaconIdNsUuid = new NSUuid(BeaconInfo.BeaconUuid + phoneNumber);
+            var beaconInfo = new BeaconInfo
+            {
+                PhoneNumber = phoneNumber,
+                BeaconIdNsUuid = beaconIdNsUuid, //monkeyUUid
+                BeaconRegion = new CLBeaconRegion(beaconIdNsUuid, phoneNumber)
+            };
+            return beaconInfo;
+        }
+
+        public void Stop()
+        {
+            foreach (var phoneNumber in _phoneNumerList)
+            {
+                var beaconInfo = GetBeaconInfo(phoneNumber);
+                _locationMgr?.StopMonitoring(beaconInfo.BeaconRegion);
+                _locationMgr?.StopRangingBeacons(beaconInfo.BeaconRegion);
+            }
+            _locationMgr = null;
         }
 
         private void Initialize()
@@ -120,5 +139,7 @@ namespace IBeaconPrototype
                 }
             };
         }
+
+
     }
 }
