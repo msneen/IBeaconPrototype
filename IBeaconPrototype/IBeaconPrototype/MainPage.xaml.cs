@@ -68,6 +68,7 @@ namespace IBeaconPrototype
 	    {
             _beaconLocatorIPhone.Stop();
 	        _beaconLocatorIPhone = null;
+            BackgroundColor=Color.White;
 	    }
 	}
 }
