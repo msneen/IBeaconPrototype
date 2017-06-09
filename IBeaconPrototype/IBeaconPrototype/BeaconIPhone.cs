@@ -70,8 +70,8 @@ namespace IBeaconPrototype
         }
 
         public bool GetIsAdvertising()
-        {
-            return _peripheralDelegate.Advertising;
+        {            
+            return _peripheralMgr.Advertising;
         }
     }
     public class BTPeripheralDelegate : CBPeripheralManagerDelegate
