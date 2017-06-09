@@ -51,12 +51,13 @@ namespace IBeaconPrototype
             var power = new NSNumber(-59);
             _peripheralData = beaconRegion.GetPeripheralData(power);
             _peripheralDelegate = new BTPeripheralDelegate();
-            _peripheralMgr = new CBPeripheralManager(_peripheralDelegate, DispatchQueue.DefaultGlobalQueue);           
+            _peripheralMgr = new CBPeripheralManager(_peripheralDelegate, DispatchQueue.DefaultGlobalQueue);
+            _peripheralMgr.StartAdvertising(_peripheralData);
         }
 
         public void StartAdvertising()
         {
-            _peripheralMgr.StartAdvertising(_peripheralData);
+           // _peripheralMgr.StartAdvertising(_peripheralData);
         }
 
         public void StopAdvertising()
