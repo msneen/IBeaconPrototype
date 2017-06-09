@@ -45,7 +45,7 @@ namespace IBeaconPrototype
         {
             var beaconId = BeaconInfo.BeaconUuid;// + _phoneNumber;
             var beaconUUID = new NSUuid(beaconId);
-            var beaconRegion = new CLBeaconRegion(beaconUUID, _phoneNumber);
+            var beaconRegion = new CLBeaconRegion(beaconUUID, "" /*_phoneNumber*/);
 
             //power - the received signal strength indicator (RSSI) value (measured in decibels) of the beacon from one meter away
             var power = new NSNumber(-59);
