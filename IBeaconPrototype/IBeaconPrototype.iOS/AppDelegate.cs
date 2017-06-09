@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CoreLocation;
 using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
@@ -23,9 +24,13 @@ namespace IBeaconPrototype.iOS
 		//
 		// You have 17 seconds to return from this method, or iOS will terminate your application.
 		//
+	    private CLLocationManager _locationManager;
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
             MobileCenter.Start("27ddf720-97e5-4eea-839d-4ee03e8e8264", typeof(Analytics), typeof(Crashes), typeof(Distribute));
+
+            _locationManager = new CLLocationManager();
+            _locationManager.RequestAlwaysAuthorization();
 
             global::Xamarin.Forms.Forms.Init ();
 			LoadApplication (new IBeaconPrototype.App ());

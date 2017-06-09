@@ -53,6 +53,7 @@ namespace IBeaconPrototype
             _peripheralDelegate = new BTPeripheralDelegate();
             _peripheralMgr = new CBPeripheralManager(_peripheralDelegate, DispatchQueue.DefaultGlobalQueue);
             _peripheralMgr.StartAdvertising(_peripheralData);
+            
         }
 
         public void StartAdvertising()
