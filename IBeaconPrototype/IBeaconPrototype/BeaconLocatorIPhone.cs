@@ -51,8 +51,7 @@ namespace IBeaconPrototype
 
         private readonly List<BeaconInfo> _beaconInfoList = new List<BeaconInfo>();
 
-        private string monkeyId = "6199224340";
-        private List<string> _phoneNumerList;
+        private readonly List<string> _phoneNumerList;
 
         public BeaconLocatorIPhone(List<string> phoneNumbers)
         {

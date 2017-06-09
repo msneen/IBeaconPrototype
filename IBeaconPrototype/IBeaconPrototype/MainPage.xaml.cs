@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CoreBluetooth;
 using Xamarin.Forms;
 
 namespace IBeaconPrototype
@@ -78,10 +79,20 @@ namespace IBeaconPrototype
         private void ListenButtonOff_OnClicked(object sender, EventArgs e)
 	    {
 #if __IOS__
-            _beaconLocatorIPhone.Stop();
-	        _beaconLocatorIPhone = null;
-            BackgroundColor=Color.White;
+         //   _beaconLocatorIPhone.Stop();
+	        //_beaconLocatorIPhone = null;
+         //   BackgroundColor=Color.White;
 #endif
-        }
+
+            var state = _beaconIPhone.GetState();
+            if (state == CBPeripheralManagerState.PoweredOn)
+            {
+                BackgroundColor = Color.Aqua;
+            }
+            else
+            {
+                BackgroundColor= Color.Coral;
+            }
+	    }
     }
 }

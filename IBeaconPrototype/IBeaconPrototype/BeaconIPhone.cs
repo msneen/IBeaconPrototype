@@ -23,8 +23,6 @@ namespace IBeaconPrototype
     {
         private string _phoneNumber;
         
-        //public static string _iBeaconId = "Monkey";
-
         private CBPeripheralManager _peripheralMgr;
         private BTPeripheralDelegate _peripheralDelegate;
         private CLLocationManager _locationMgr;
@@ -45,33 +43,41 @@ namespace IBeaconPrototype
         {
             var beaconId = BeaconInfo.BeaconUuid;// + _phoneNumber;
             var beaconUUID = new NSUuid(beaconId);
-            var beaconRegion = new CLBeaconRegion(beaconUUID, "" /*_phoneNumber*/);
+            var beaconRegion = new CLBeaconRegion(beaconUUID, _phoneNumber);
 
             //power - the received signal strength indicator (RSSI) value (measured in decibels) of the beacon from one meter away
             var power = new NSNumber(-59);
             _peripheralData = beaconRegion.GetPeripheralData(power);
             _peripheralDelegate = new BTPeripheralDelegate();
             _peripheralMgr = new CBPeripheralManager(_peripheralDelegate, DispatchQueue.DefaultGlobalQueue);
-            _peripheralMgr.StartAdvertising(_peripheralData);
+            //_peripheralMgr.StartAdvertising(_peripheralData);
             
         }
 
         public void StartAdvertising()
         {
-           // _peripheralMgr.StartAdvertising(_peripheralData);
+            _peripheralMgr.StartAdvertising(_peripheralData);
         }
 
         public void StopAdvertising()
         {
             _peripheralMgr.StopAdvertising();
         }
+
+        public CBPeripheralManagerState GetState()
+        {
+            return _peripheralDelegate.BeaconState;
+        }
     }
     public class BTPeripheralDelegate : CBPeripheralManagerDelegate
     {
+        public CBPeripheralManagerState BeaconState { get; set; }
+
         public override void StateUpdated(CBPeripheralManager peripheral)
         {
             if (peripheral.State == CBPeripheralManagerState.PoweredOn)
             {
+                BeaconState = peripheral.State;
                 Console.WriteLine("powered on");
             }
         }
