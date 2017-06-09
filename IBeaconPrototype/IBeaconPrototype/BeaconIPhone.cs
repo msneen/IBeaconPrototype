@@ -43,7 +43,7 @@ namespace IBeaconPrototype
 
         private void Initialize()
         {
-            var beaconId = BeaconInfo.BeaconUuid + _phoneNumber;
+            var beaconId = BeaconInfo.BeaconUuid;// + _phoneNumber;
             var beaconUUID = new NSUuid(beaconId);
             var beaconRegion = new CLBeaconRegion(beaconUUID, _phoneNumber);
 

@@ -22,7 +22,7 @@ namespace IBeaconPrototype
 
     public class BeaconInfo
     {
-        public static string BeaconUuid = "E4C8A4FC-F68B-470D-959F-29";//"E4C8A4FC-F68B-470D-959F-29382AF72CE7";
+        public static string BeaconUuid = "E4C8A4FC-F68B-470D-959F-29382AF72CE7"; //"E4C8A4FC-F68B-470D-959F-29";//
 
         public string PhoneNumber { get; set; }
         public NSUuid BeaconIdNsUuid { get; set; }
