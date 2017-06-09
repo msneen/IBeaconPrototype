@@ -85,7 +85,9 @@ namespace IBeaconPrototype
 #endif
 
             var state = _beaconIPhone.GetState();
-            if (state == CBPeripheralManagerState.PoweredOn)
+            var isAdvertising = _beaconIPhone.GetIsAdvertising();
+
+            if (state == CBPeripheralManagerState.PoweredOn && isAdvertising)
             {
                 BackgroundColor = Color.Aqua;
             }

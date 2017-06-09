@@ -68,16 +68,23 @@ namespace IBeaconPrototype
         {
             return _peripheralDelegate.BeaconState;
         }
+
+        public bool GetIsAdvertising()
+        {
+            return _peripheralDelegate.Advertising;
+        }
     }
     public class BTPeripheralDelegate : CBPeripheralManagerDelegate
     {
         public CBPeripheralManagerState BeaconState { get; set; }
+        public bool Advertising { get; set; }
 
         public override void StateUpdated(CBPeripheralManager peripheral)
         {
             if (peripheral.State == CBPeripheralManagerState.PoweredOn)
             {
                 BeaconState = peripheral.State;
+                Advertising = peripheral.Advertising;
                 Console.WriteLine("powered on");
             }
         }
